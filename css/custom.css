@@ -765,8 +765,36 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   color: #b77952 !important;
 }
 
-#blog-info > a.nav-site-title:hover + .nav-dropdown,
-.nav-dropdown:hover {
+#nav-dropdown-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--font-color);
+  cursor: pointer;
+  font-size: .75em;
+  transition: all .3s;
+}
+
+#nav-dropdown-btn:hover {
+  color: #b77952;
+  background-color: rgba(183, 121, 82, .12);
+}
+
+#nav-dropdown-btn i {
+  transition: transform .3s;
+}
+
+#nav-dropdown-btn[aria-expanded='true'] i {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown.show {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
