@@ -717,3 +717,57 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 #category .article-sort-item-time time {
   color: rgb(0, 122, 255) !important;
 }
+
+/* 将导航菜单折叠进左侧站点名(OLcan)的悬浮下拉列表 */
+#blog-info {
+  position: relative;
+  overflow: visible;
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  min-width: 170px;
+  padding-top: 8px;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, visibility .3s ease;
+}
+
+.nav-dropdown .menus_items {
+  display: block !important;
+  padding: 6px 0;
+  background-color: var(--sidebar-bg);
+  border-radius: 8px;
+  box-shadow: 0 5px 20px -4px rgba(0, 0, 0, .5);
+  overflow: hidden;
+}
+
+.nav-dropdown .menus_item {
+  display: block !important;
+  padding: 0 !important;
+}
+
+.nav-dropdown .menus_item a {
+  display: block;
+  padding: 8px 20px;
+  color: var(--font-color) !important;
+  text-shadow: none !important;
+  font-size: .85em;
+  line-height: 1.6;
+}
+
+.nav-dropdown .menus_item a:hover {
+  background-color: var(--text-bg-hover);
+  color: #b77952 !important;
+}
+
+#blog-info > a.nav-site-title:hover + .nav-dropdown,
+.nav-dropdown:hover {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
