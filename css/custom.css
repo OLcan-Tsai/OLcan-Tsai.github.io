@@ -20,19 +20,19 @@ html[data-theme='light'] {
   --card-bg: #fffaf3;
   --sidebar-bg: #f1e8dc;
   --font-color: #4d4137;
-  --accent-color: rgb(255, 149, 0);
-  --btn-bg: rgb(255, 149, 0);
+  --accent-color: rgb(255, 140, 0);
+  --btn-bg: rgb(255, 140, 0);
   --btn-hover-color: rgb(255, 181, 56);
   --btn-color: #ffffff;
-  --text-bg-hover: rgba(255, 149, 0, .18);
+  --text-bg-hover: rgba(255, 140, 0, .18);
   --light-grey: #e8dccd;
   --dark-grey: #cdbba8;
   --white: #fffdf8;
-  --default-bg-color: rgb(255, 149, 0);
-  --scrollbar-color: rgb(255, 149, 0);
-  --hr-border: rgba(255, 149, 0, .55);
-  --hr-before-color: rgb(255, 149, 0);
-  --toc-link-color: rgba(255, 149, 0, .9);
+  --default-bg-color: rgb(255, 140, 0);
+  --scrollbar-color: rgb(255, 140, 0);
+  --hr-border: rgba(255, 140, 0, .55);
+  --hr-before-color: rgb(255, 140, 0);
+  --toc-link-color: rgba(255, 140, 0, .9);
   --card-box-shadow: 0 4px 14px rgba(112, 77, 49, .08);
   --card-hover-box-shadow: 0 6px 18px rgba(112, 77, 49, .14);
 }
@@ -105,9 +105,10 @@ html[data-theme='light'] #nav {
 
 #footer .footer-social {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 10px 24px;
 }
 
 #footer .footer-social-link {
@@ -124,6 +125,8 @@ html[data-theme='light'] #nav {
 }
 
 #footer .footer-author {
+  flex-basis: 100%;
+  text-align: center;
   color: var(--font-color);
 }
 
@@ -294,7 +297,7 @@ html[data-theme='light'] #nav {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #8f7e6e;
+  color: var(--font-color);
   font-size: 1em;
   line-height: 1.4;
   pointer-events: none;
@@ -485,16 +488,16 @@ html[data-theme='dark'] #pagination.pagination-post .pagination-related .info-it
 
 /* Purple accent for compact controls and interactive states in dark mode. */
 html[data-theme='dark'] {
-  --accent-color: rgb(191, 90, 242);
-  --btn-bg: rgb(191, 90, 242);
+  --accent-color: rgb(111, 66, 193);
+  --btn-bg: rgb(111, 66, 193);
   --btn-hover-color: rgb(211, 132, 247);
   --btn-color: #ffffff;
-  --text-bg-hover: rgba(191, 90, 242, .22);
-  --default-bg-color: rgb(191, 90, 242);
-  --scrollbar-color: rgb(191, 90, 242);
-  --hr-border: rgba(191, 90, 242, .55);
-  --hr-before-color: rgb(191, 90, 242);
-  --toc-link-color: rgba(191, 90, 242, .9);
+  --text-bg-hover: rgba(111, 66, 193, .22);
+  --default-bg-color: rgb(111, 66, 193);
+  --scrollbar-color: rgb(111, 66, 193);
+  --hr-border: rgba(111, 66, 193, .55);
+  --hr-before-color: rgb(111, 66, 193);
+  --toc-link-color: rgba(111, 66, 193, .9);
 }
 
 html[data-theme='dark'] ::selection,
@@ -639,7 +642,7 @@ body,
 }
 
 #archive .article-sort-item-title:hover {
-  color: #8c8c8c !important;
+  color: var(--accent-color) !important;
 }
 
 #page .category-lists ul li::before,
@@ -648,17 +651,25 @@ body,
 }
 
 #page .category-lists .category-list a:hover {
-  color: #8c8c8c !important;
+  color: var(--accent-color) !important;
 }
 
-/* Use R0 G122 B255 for every tag-cloud chip, including its hover state. */
+/* Tag-cloud chips follow the blockquote accent: orange in light, purple in dark. */
 #page .tag-cloud-list > a,
 #page .tag-cloud-list > a:hover,
 #page .tag-cloud-list > a:active {
-  background: rgb(0, 122, 255) !important;
-  background-color: rgb(0, 122, 255) !important;
+  background: #ff8c00 !important;
+  background-color: #ff8c00 !important;
   color: #ffffff !important;
   font-size: 1.3em !important;
+}
+
+html[data-theme='dark'] #page .tag-cloud-list > a,
+html[data-theme='dark'] #page .tag-cloud-list > a:hover,
+html[data-theme='dark'] #page .tag-cloud-list > a:active {
+  background: #6f42c1 !important;
+  background-color: #6f42c1 !important;
+  color: #ffffff !important;
 }
 
 /* Match the body scale used by articles on the remaining content pages. */
@@ -684,7 +695,7 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 #archive .article-sort-item-time,
 #archive .article-sort-item-time i,
 #archive .article-sort-item-time time {
-  color: rgb(0, 122, 255) !important;
+  color: var(--font-color) !important;
 }
 
 /* Category detail pages use #category instead of #archive. */
@@ -709,13 +720,44 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 }
 
 #category .article-sort-item-title:hover {
-  color: #8c8c8c !important;
+  color: var(--accent-color) !important;
 }
 
 #category .article-sort-item-time,
 #category .article-sort-item-time i,
 #category .article-sort-item-time time {
-  color: rgb(0, 122, 255) !important;
+  color: var(--font-color) !important;
+}
+
+/* Tag detail pages use the same neutral accents as archive and category. */
+#tag .article-sort {
+  border-left-color: #8c8c8c;
+}
+
+#tag .article-sort-title::before,
+#tag .article-sort-item::before,
+#tag .article-sort-item.year::before {
+  border-color: #8c8c8c !important;
+}
+
+#tag .article-sort-title::after {
+  background: #8c8c8c;
+}
+
+#tag .article-sort-title:hover::before,
+#tag .article-sort-item:hover::before,
+#tag .article-sort-item.year:hover::before {
+  border-color: #8c8c8c !important;
+}
+
+#tag .article-sort-item-title:hover {
+  color: var(--accent-color) !important;
+}
+
+#tag .article-sort-item-time,
+#tag .article-sort-item-time i,
+#tag .article-sort-item-time time {
+  color: var(--font-color) !important;
 }
 
 /* 将导航菜单折叠进左侧站点名(OLcan)的悬浮下拉列表 */
@@ -724,18 +766,24 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   overflow: visible;
 }
 
+.nav-dropdown-wrap {
+  position: relative;
+  display: inline-block;
+}
+
 .nav-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 0;
+  left: 100%;
+  margin-left: 6px;
   z-index: 999;
   min-width: 170px;
   visibility: hidden;
   opacity: 0;
-  transform: translateY(-10px) scaleY(.96);
-  transform-origin: top center;
+  transform: translateX(-10px) scaleX(.96);
+  transform-origin: left center;
   pointer-events: none;
-  transition: opacity .35s cubic-bezier(.22, .61, .36, 1), transform .35s cubic-bezier(.22, .61, .36, 1), visibility .35s;
+  transition: opacity .3s cubic-bezier(.22, .61, .36, 1), transform .3s cubic-bezier(.22, .61, .36, 1), visibility .3s;
 }
 
 .nav-dropdown .menus_items {
@@ -767,7 +815,7 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 
 .nav-dropdown .menus_item a:hover {
   background-color: var(--text-bg-hover);
-  color: #b77952 !important;
+  color: var(--accent-color) !important;
 }
 
 #nav-dropdown-btn {
@@ -787,8 +835,8 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 }
 
 #nav-dropdown-btn:hover {
-  color: #b77952;
-  background-color: rgba(183, 121, 82, .12);
+  color: var(--accent-color);
+  background-color: var(--text-bg-hover);
 }
 
 #nav-dropdown-btn .chestnut-icon {
@@ -801,11 +849,45 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   transform: scale(1.18);
 }
 
-.nav-dropdown.show,
-#nav-dropdown-btn:hover + .nav-dropdown,
-.nav-dropdown:hover {
+.nav-dropdown.show {
   visibility: visible;
   opacity: 1;
-  transform: translateY(0) scaleY(1);
+  transform: translateX(0) scaleX(1);
   pointer-events: auto;
+}
+
+/* 引用块：浅色模式橙色 #ff8c00，深色模式紫色 #6f42c1 */
+blockquote {
+  border-left-color: #ff8c00;
+  background-color: transparent;
+}
+
+html[data-theme='dark'] blockquote {
+  border-left-color: #6f42c1;
+  background-color: transparent;
+}
+
+/* 所有时间相关元素使用当前模式的正文字色 */
+#post-info #post-meta time,
+.article-meta-wrap time,
+#aside-content .aside-list .aside-list-item .content > time,
+#last-push-date,
+.container .timeline .timeline-item .item-circle,
+.container .timeline .timeline-item .item-circle p {
+  color: var(--font-color) !important;
+}
+
+/* Homepage article titles turn the accent color on hover. */
+#recent-posts .recent-post-item > .recent-post-info > .article-title:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Categories page note count follows the accent. */
+.category-lists .category-list .category-list-count {
+  color: var(--accent-color) !important;
+}
+
+/* Site-data links (Articles / Tags / Categories) highlight with the accent. */
+.site-data > a:hover div {
+  color: var(--accent-color) !important;
 }
