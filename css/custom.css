@@ -799,3 +799,10 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   opacity: 1;
   pointer-events: auto;
 }
+
+#nav-dropdown-btn:hover + .nav-dropdown,
+.nav-dropdown:hover {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
