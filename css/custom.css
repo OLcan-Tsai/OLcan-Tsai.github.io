@@ -1,0 +1,719 @@
+/* Warm paper palette */
+@font-face {
+  font-family: 'LXGW WenKai';
+  src: url('/fonts/LXGWWenKai-Regular.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Maple Mono';
+  src: url('/fonts/MapleMono-Medium.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+html[data-theme='light'] {
+  --global-bg: #f7f1e8;
+  --card-bg: #fffaf3;
+  --sidebar-bg: #f1e8dc;
+  --font-color: #4d4137;
+  --accent-color: rgb(255, 149, 0);
+  --btn-bg: rgb(255, 149, 0);
+  --btn-hover-color: rgb(255, 181, 56);
+  --btn-color: #ffffff;
+  --text-bg-hover: rgba(255, 149, 0, .18);
+  --light-grey: #e8dccd;
+  --dark-grey: #cdbba8;
+  --white: #fffdf8;
+  --default-bg-color: rgb(255, 149, 0);
+  --scrollbar-color: rgb(255, 149, 0);
+  --hr-border: rgba(255, 149, 0, .55);
+  --hr-before-color: rgb(255, 149, 0);
+  --toc-link-color: rgba(255, 149, 0, .9);
+  --card-box-shadow: 0 4px 14px rgba(112, 77, 49, .08);
+  --card-hover-box-shadow: 0 6px 18px rgba(112, 77, 49, .14);
+}
+
+body {
+  font-family: 'LXGW WenKai', sans-serif;
+}
+
+::selection {
+  background: #d9d9d9;
+  color: #1f2d3d;
+}
+
+::-moz-selection {
+  background: #d9d9d9;
+  color: #1f2d3d;
+}
+
+pre,
+code,
+.highlight,
+.highlight code {
+  font-family: 'Maple Mono', monospace !important;
+}
+
+html[data-theme='light'] body {
+  background: var(--global-bg);
+}
+
+html[data-theme='light'] #page-header.not-top-img {
+  background-color: transparent;
+}
+
+html[data-theme='light'] #nav {
+  background: rgba(255, 250, 243, .94);
+  border-bottom: 1px solid #eadccc;
+}
+
+#nav {
+  font-size: 1.45em;
+}
+
+/* Transparent right-side controls with readable colors in both themes. */
+#rightside > div > button,
+#rightside > div > a {
+  background: transparent !important;
+  border: 1px solid transparent;
+  box-shadow: none !important;
+  color: var(--font-color) !important;
+}
+
+#rightside > div > button:hover,
+#rightside > div > a:hover {
+  background: transparent !important;
+  color: var(--btn-hover-color) !important;
+}
+
+/* The homepage is intentionally a single-column reading list. */
+#footer {
+  background: transparent !important;
+}
+
+#footer > * {
+  color: var(--font-color);
+}
+
+#footer .footer-other {
+  padding: 28px 20px 38px;
+}
+
+#footer .footer-social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+#footer .footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--font-color);
+  font-size: 1em;
+  transition: color .2s ease-in-out;
+}
+
+#footer .footer-social-link:hover {
+  color: var(--btn-hover-color);
+}
+
+#footer .footer-author {
+  color: var(--font-color);
+}
+
+/* Keep the brand and navigation together on the left side of the header. */
+@media screen and (min-width: 769px) {
+  #nav {
+    justify-content: flex-start;
+  }
+
+  #nav #blog-info {
+    flex: 0 0 auto;
+    margin-right: 28px;
+  }
+
+  #nav #menus {
+    margin-left: 0;
+  }
+
+  #nav .site-page {
+    font-size: .85em;
+  }
+}
+
+/* Keep the article in a centered paper panel beside the reduced sidebar. */
+#content-inner.layout > #post {
+  align-self: flex-start;
+  margin: 0 auto;
+  padding: 58px 72px 70px;
+  background: #fffaf3;
+  border: 1px solid #eadccc;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(112, 77, 49, .09);
+}
+
+/* Keep the article panel at three quarters of the former single-column width. */
+#content-inner.layout.hide-aside > #post {
+  max-width: 1125px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#content-inner.layout > #post > #post-info {
+  position: static;
+  width: auto;
+  margin-bottom: 34px;
+  padding: 0;
+  text-align: left;
+  transform: none;
+}
+
+#content-inner.layout > #post > #post-info .post-title {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  color: #302a25;
+  font-size: 2.55em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+#content-inner.layout > #post > #post-info #post-meta,
+#content-inner.layout > #post > #post-info #post-meta a {
+  color: #8f7e6e;
+}
+
+#content-inner.layout > #post #article-container {
+  padding: 0;
+  color: #4d4137;
+  font-size: 1.3em;
+  line-height: 2;
+}
+
+#content-inner.layout > #post #article-container img {
+  border-radius: 8px;
+}
+
+/* The same paper treatment is used when an individual page has no aside. */
+#content-inner.layout.hide-aside {
+  max-width: 1500px;
+  padding: 36px 24px 70px;
+}
+
+#content-inner.layout.hide-aside > div:first-child {
+  width: 100%;
+}
+
+#content-inner.layout.hide-aside > #recent-posts {
+  max-width: 900px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#recent-posts .home-section-title {
+  margin: 0 0 28px;
+  color: #3f352d;
+  font-size: 2.3em;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: left;
+}
+
+#recent-posts .recent-post-item {
+  position: relative;
+  display: block;
+  height: auto;
+  min-height: 0;
+  margin-bottom: 28px;
+  padding: 52px 80px 56px;
+  border: 1px solid #eadccc;
+  border-radius: 12px;
+  background: #fffdf8;
+  box-shadow: 0 5px 18px rgba(112, 77, 49, .09);
+}
+
+#recent-posts .recent-post-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+#recent-posts .recent-post-card-link:focus-visible {
+  outline: 3px solid var(--btn-bg);
+  outline-offset: -4px;
+}
+
+#recent-posts .recent-post-info,
+#recent-posts .post_cover {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+#recent-posts .recent-post-info a,
+#recent-posts .post_cover a {
+  pointer-events: auto;
+}
+
+#recent-posts .recent-post-item:last-child {
+  margin-bottom: 0;
+}
+
+#recent-posts .recent-post-info.no-cover {
+  padding: 0;
+  width: 100%;
+}
+
+#recent-posts .article-title {
+  color: #3f352d;
+  font-size: 2.05em;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+#recent-posts .article-meta-wrap {
+  display: none;
+}
+
+#recent-posts .recent-post-date {
+  position: absolute;
+  right: auto;
+  bottom: 24px;
+  left: 80px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8f7e6e;
+  font-size: 1em;
+  line-height: 1.4;
+  pointer-events: none;
+}
+
+#recent-posts .recent-post-date i {
+  font-size: .9em;
+}
+
+#recent-posts .content {
+  display: block;
+  overflow: visible;
+  margin-top: 20px;
+  color: #5a4c40;
+  font-size: 1.08em;
+  line-height: 2;
+  -webkit-line-clamp: unset;
+}
+
+/* Avatar links to the About page without a rotation effect. */
+.avatar-link {
+  display: block;
+}
+
+.avatar-img img:hover {
+  transform: none !important;
+}
+
+/* Minimal previous/next title links at the bottom-right of an article. */
+#pagination.pagination-post {
+  gap: 18px;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+#pagination.pagination-post .pagination-related {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: auto !important;
+  height: auto;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #5a4738;
+}
+
+#pagination.pagination-post .pagination-related .cover {
+  display: none;
+}
+
+#pagination.pagination-post .pagination-related .info {
+  position: static !important;
+  top: auto;
+  display: block;
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  transform: none;
+}
+
+#pagination.pagination-post .pagination-related .info-1 {
+  position: static !important;
+  top: auto;
+  display: block !important;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  color: #5a4738;
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+#pagination.pagination-post .pagination-related .info-item-1,
+#pagination.pagination-post .pagination-related .info-item-2 {
+  position: static !important;
+  top: auto;
+  display: block !important;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+#pagination.pagination-post .pagination-related .info-item-1 {
+  color: #a07859;
+  font-size: .9em;
+  text-transform: uppercase;
+}
+
+#pagination.pagination-post .pagination-related .info-item-2 {
+  margin-top: 4px;
+  color: #553d2d;
+  font-size: 1.15em;
+  white-space: nowrap;
+  transition: color .2s ease-in-out;
+}
+
+#pagination.pagination-post .pagination-related:hover {
+  background: transparent;
+  color: var(--btn-hover-color);
+  transform: none;
+}
+
+#pagination.pagination-post .pagination-related:hover .info-item-2 {
+  color: var(--btn-hover-color);
+}
+
+@media screen and (max-width: 768px) {
+  #content-inner.layout.hide-aside {
+    padding: 20px 12px 50px;
+  }
+
+  #content-inner.layout > #post,
+  #content-inner.layout.hide-aside > #post {
+    padding: 34px 22px 46px;
+  }
+
+  #recent-posts .recent-post-item {
+    padding: 34px 24px 38px;
+  }
+
+  #recent-posts .recent-post-date {
+    bottom: 20px;
+    left: 24px;
+  }
+
+  #recent-posts .article-title,
+  #content-inner.layout > #post > #post-info .post-title,
+  #content-inner.layout.hide-aside > #post > #post-info .post-title {
+    font-size: 1.75em;
+  }
+
+  #pagination.pagination-post {
+    gap: 12px;
+  }
+
+  #pagination.pagination-post .pagination-related .info {
+    padding: 0;
+  }
+
+  #pagination.pagination-post .pagination-related .info-item-2 {
+    white-space: normal;
+  }
+}
+
+/* Restore contrast for the custom paper layout when dark mode is active. */
+html[data-theme='dark'] #nav {
+  background: rgba(18, 18, 18, .92);
+  border-bottom-color: #2c2c2c;
+}
+
+html[data-theme='dark'] #content-inner.layout > #post,
+html[data-theme='dark'] #recent-posts .recent-post-item {
+  background: #1b1b1b;
+  border-color: #2c2c2c;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, .35);
+}
+
+html[data-theme='dark'] #content-inner.layout > #post > #post-info .post-title,
+html[data-theme='dark'] #recent-posts .article-title,
+html[data-theme='dark'] #recent-posts .home-section-title {
+  color: var(--text-highlight-color);
+}
+
+html[data-theme='dark'] #content-inner.layout > #post > #post-info #post-meta,
+html[data-theme='dark'] #content-inner.layout > #post > #post-info #post-meta a,
+html[data-theme='dark'] #content-inner.layout > #post #article-container,
+html[data-theme='dark'] #recent-posts .content {
+  color: var(--font-color);
+}
+
+html[data-theme='dark'] #pagination.pagination-post .pagination-related,
+html[data-theme='dark'] #pagination.pagination-post .pagination-related .info-1,
+html[data-theme='dark'] #pagination.pagination-post .pagination-related .info-item-2 {
+  color: var(--font-color);
+}
+
+html[data-theme='dark'] #pagination.pagination-post .pagination-related .info-item-1 {
+  color: var(--light-grey);
+}
+
+/* Purple accent for compact controls and interactive states in dark mode. */
+html[data-theme='dark'] {
+  --accent-color: rgb(191, 90, 242);
+  --btn-bg: rgb(191, 90, 242);
+  --btn-hover-color: rgb(211, 132, 247);
+  --btn-color: #ffffff;
+  --text-bg-hover: rgba(191, 90, 242, .22);
+  --default-bg-color: rgb(191, 90, 242);
+  --scrollbar-color: rgb(191, 90, 242);
+  --hr-border: rgba(191, 90, 242, .55);
+  --hr-before-color: rgb(191, 90, 242);
+  --toc-link-color: rgba(191, 90, 242, .9);
+}
+
+html[data-theme='dark'] ::selection,
+html[data-theme='dark'] ::-moz-selection {
+  background: #d9d9d9;
+  color: #1f2d3d;
+}
+
+html[data-theme='dark'] #nav .site-page:not(.child):after {
+  background-color: var(--accent-color);
+}
+
+html[data-theme='dark'] #nav a:hover,
+html[data-theme='dark'] #nav span.site-page:hover,
+html[data-theme='dark'] #nav #toggle-menu:hover,
+html[data-theme='dark'] #article-container a:hover,
+html[data-theme='dark'] #post-meta a:hover {
+  color: var(--accent-color) !important;
+}
+
+html[data-theme='dark'] #article-container a {
+  color: var(--accent-color);
+}
+
+html[data-theme='dark'] #post .post-meta__tags {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+html[data-theme='dark'] #post .post-meta__tags:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+}
+
+html[data-theme='dark'] #pagination.pagination-post .pagination-related .info-item-1 {
+  color: var(--accent-color);
+}
+
+/* Orange accent for compact controls and interactive states in light mode. */
+html[data-theme='light'] ::selection,
+html[data-theme='light'] ::-moz-selection {
+  background: rgb(255, 149, 0);
+  color: #ffffff;
+}
+
+html[data-theme='light'] #nav .site-page:not(.child):after {
+  background-color: var(--accent-color);
+}
+
+html[data-theme='light'] #nav a:hover,
+html[data-theme='light'] #nav span.site-page:hover,
+html[data-theme='light'] #nav #toggle-menu:hover,
+html[data-theme='light'] #article-container a:hover,
+html[data-theme='light'] #post-meta a:hover {
+  color: var(--accent-color) !important;
+}
+
+html[data-theme='light'] #article-container a {
+  color: var(--accent-color);
+}
+
+html[data-theme='light'] #post .post-meta__tags {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+html[data-theme='light'] #post .post-meta__tags:hover {
+  background: var(--accent-color);
+  color: #ffffff;
+}
+
+html[data-theme='light'] #pagination.pagination-post .pagination-related .info-item-1 {
+  color: var(--accent-color);
+}
+
+/* Use the same compact scrollbar everywhere: charcoal track and light-gray thumb. */
+html,
+body,
+* {
+  scrollbar-color: #a6a6a6 #2b2b2b !important;
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: #2b2b2b;
+}
+
+*::-webkit-scrollbar-track {
+  background: #2b2b2b;
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid #2b2b2b;
+  border-radius: 6px;
+  background: #a6a6a6;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #c3c3c3;
+}
+
+*::-webkit-scrollbar-button:single-button {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #2b2b2b;
+}
+
+*::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 5px 6px;
+  border-style: solid;
+  border-color: transparent transparent #a6a6a6;
+}
+
+*::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 6px 5px 0;
+  border-style: solid;
+  border-color: #a6a6a6 transparent transparent;
+}
+
+/* Neutral gray accents for the archive timeline and category list. */
+#archive .article-sort {
+  border-left-color: #8c8c8c;
+}
+
+#archive .article-sort-title::before,
+#archive .article-sort-item::before,
+#archive .article-sort-item.year::before {
+  border-color: #8c8c8c !important;
+}
+
+#archive .article-sort-title::after {
+  background: #8c8c8c;
+}
+
+#archive .article-sort-title:hover::before,
+#archive .article-sort-item:hover::before,
+#archive .article-sort-item.year:hover::before {
+  border-color: #8c8c8c !important;
+}
+
+#archive .article-sort-item-title:hover {
+  color: #8c8c8c !important;
+}
+
+#page .category-lists ul li::before,
+#page .category-lists ul li:hover::before {
+  border-color: #8c8c8c !important;
+}
+
+#page .category-lists .category-list a:hover {
+  color: #8c8c8c !important;
+}
+
+/* Use R0 G122 B255 for every tag-cloud chip, including its hover state. */
+#page .tag-cloud-list > a,
+#page .tag-cloud-list > a:hover,
+#page .tag-cloud-list > a:active {
+  background: rgb(0, 122, 255) !important;
+  background-color: rgb(0, 122, 255) !important;
+  color: #ffffff !important;
+  font-size: 1.3em !important;
+}
+
+/* Match the body scale used by articles on the remaining content pages. */
+#content-inner.layout > #page #article-container {
+  font-size: 1.3em;
+  line-height: 2;
+}
+
+#content-inner.layout > #archive .article-sort-item,
+#content-inner.layout > #page .category-lists .category-list {
+  font-size: 1.3em;
+}
+
+/* Keep social icons visible against the dark author card. */
+html[data-theme='dark'] #aside-content .card-info-social-icons a[href*='x.com'] i,
+html[data-theme='dark'] #aside-content .card-info-social-icons a[href*='github.com'] i,
+html[data-theme='dark'] #footer .footer-social-link[href*='x.com'],
+html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
+  color: #f2f2f2 !important;
+}
+
+/* Archive dates and calendar icons use the site blue; the timeline stays gray. */
+#archive .article-sort-item-time,
+#archive .article-sort-item-time i,
+#archive .article-sort-item-time time {
+  color: rgb(0, 122, 255) !important;
+}
+
+/* Category detail pages use #category instead of #archive. */
+#category .article-sort {
+  border-left-color: #8c8c8c;
+}
+
+#category .article-sort-title::before,
+#category .article-sort-item::before,
+#category .article-sort-item.year::before {
+  border-color: #8c8c8c !important;
+}
+
+#category .article-sort-title::after {
+  background: #8c8c8c;
+}
+
+#category .article-sort-title:hover::before,
+#category .article-sort-item:hover::before,
+#category .article-sort-item.year:hover::before {
+  border-color: #8c8c8c !important;
+}
+
+#category .article-sort-item-title:hover {
+  color: #8c8c8c !important;
+}
+
+#category .article-sort-item-time,
+#category .article-sort-item-time i,
+#category .article-sort-item-time time {
+  color: rgb(0, 122, 255) !important;
+}
