@@ -719,7 +719,7 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
 }
 
 /* 将导航菜单折叠进左侧站点名(OLcan)的悬浮下拉列表 */
-#blog-info {
+#nav #blog-info {
   position: relative;
   overflow: visible;
 }
@@ -730,20 +730,25 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   left: 0;
   z-index: 999;
   min-width: 170px;
-  padding-top: 8px;
   visibility: hidden;
   opacity: 0;
+  transform: translateY(-10px) scaleY(.96);
+  transform-origin: top center;
   pointer-events: none;
-  transition: opacity .3s ease, visibility .3s ease;
+  transition: opacity .35s cubic-bezier(.22, .61, .36, 1), transform .35s cubic-bezier(.22, .61, .36, 1), visibility .35s;
 }
 
 .nav-dropdown .menus_items {
   display: block !important;
   padding: 6px 0;
-  background-color: var(--sidebar-bg);
-  border-radius: 8px;
-  box-shadow: 0 5px 20px -4px rgba(0, 0, 0, .5);
+  background-color: #fffaf3;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .18);
   overflow: hidden;
+}
+
+[data-theme='dark'] .nav-dropdown .menus_items {
+  background-color: #121212;
 }
 
 .nav-dropdown .menus_item {
@@ -771,13 +776,13 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   align-items: center;
   justify-content: center;
   margin-left: 8px;
-  padding: 2px 8px;
+  padding: 2px 6px;
   border: none;
   border-radius: 6px;
   background: transparent;
   color: var(--font-color);
   cursor: pointer;
-  font-size: .75em;
+  font-size: .95em;
   transition: all .3s;
 }
 
@@ -786,23 +791,21 @@ html[data-theme='dark'] #footer .footer-social-link[href*='github.com'] {
   background-color: rgba(183, 121, 82, .12);
 }
 
-#nav-dropdown-btn i {
-  transition: transform .3s;
+#nav-dropdown-btn .chestnut-icon {
+  display: inline-block;
+  line-height: 1;
+  transition: transform .3s ease;
 }
 
-#nav-dropdown-btn[aria-expanded='true'] i {
-  transform: rotate(180deg);
+#nav-dropdown-btn:hover .chestnut-icon {
+  transform: scale(1.18);
 }
 
-.nav-dropdown.show {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
+.nav-dropdown.show,
 #nav-dropdown-btn:hover + .nav-dropdown,
 .nav-dropdown:hover {
   visibility: visible;
   opacity: 1;
+  transform: translateY(0) scaleY(1);
   pointer-events: auto;
 }

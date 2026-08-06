@@ -194,7 +194,6 @@ template {
 .limit-more-line,
 .article-sort-item-title,
 #recent-posts .recent-post-item >.recent-post-info > .article-title,
-#recent-posts .recent-post-item >.recent-post-info > .content,
 #aside-content .aside-list > .aside-list-item .content > .name,
 #aside-content .aside-list > .aside-list-item .content > .title,
 #aside-content .aside-list > .aside-list-item .content > .comment,
@@ -2710,7 +2709,6 @@ figure.highlight pre .javascript .function {
   text-decoration: underline;
 }
 #recent-posts .recent-post-item >.recent-post-info > .content {
-  -webkit-line-clamp: 2;
   word-break: break-word;
 }
 #article-container .shuoshuo-item {
