@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LLM、Agent与Harness | OLcan's Blog🎉</title><meta name="author" content="OLcan Tsai"><meta name="copyright" content="OLcan Tsai"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#F7F1E8"><meta name="description" content="本文用&quot;大脑、四肢、衣服&quot;的比喻讲清 AI 三件套：LLM 是大脑，Agent 是给大脑配上四肢（自主规划、调用工具、执行任务），Harness 是约束 Agent 的外套，负责工具管理、进度控制和上下文管理，保证 Agent 不乱改、可恢复、可观察、可控制。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLM、Agent与Harness">
+<meta property="og:url" content="https://olcan-tsai.github.io/2026/08/07/LLM%E3%80%81Agent%E4%B8%8EHarness/index.html">
+<meta property="og:site_name" content="OLcan&#39;s Blog🎉">
+<meta property="og:description" content="本文用&quot;大脑、四肢、衣服&quot;的比喻讲清 AI 三件套：LLM 是大脑，Agent 是给大脑配上四肢（自主规划、调用工具、执行任务），Harness 是约束 Agent 的外套，负责工具管理、进度控制和上下文管理，保证 Agent 不乱改、可恢复、可观察、可控制。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://olcan-tsai.github.io/img/Hello.jpg">
+<meta property="article:published_time" content="2026-08-07T01:20:00.000Z">
+<meta property="article:modified_time" content="2026-08-07T01:20:00.000Z">
+<meta property="article:author" content="OLcan Tsai">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://olcan-tsai.github.io/img/Hello.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "LLM、Agent与Harness",
+  "url": "https://olcan-tsai.github.io/2026/08/07/LLM%E3%80%81Agent%E4%B8%8EHarness/",
+  "image": "https://olcan-tsai.github.io/img/Hello.jpg",
+  "datePublished": "2026-08-07T01:20:00.000Z",
+  "dateModified": "2026-08-07T01:20:00.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "OLcan Tsai",
+      "url": "https://olcan-tsai.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://olcan-tsai.github.io/2026/08/07/LLM%E3%80%81Agent%E4%B8%8EHarness/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        const data = { value }
+
+        if (ttl != null) {
+          data.expiry = Date.now() + ttl * 86400000
+        }
+
+        localStorage.setItem(key, JSON.stringify(data))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return
+
+        try {
+          const data = JSON.parse(itemStr)
+
+          if (data.expiry && Date.now() > data.expiry) {
+            localStorage.removeItem(key)
+            return
+          }
+
+          return data.value
+        } catch {
+          localStorage.removeItem(key)
+        }
+      }
+    }
+
+    const scriptCache = new Map()
+    const cssCache = new Map()
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => {
+        if (scriptCache.has(url)) {
+          return scriptCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement('script')
+
+          script.src = url
+          script.async = true
+
+          for (const key in attr) {
+            script.setAttribute(key, attr[key])
+          }
+
+          script.onload = resolve
+          script.onerror = reject
+
+          document.head.appendChild(script)
+        })
+
+        scriptCache.set(url, promise)
+
+        return promise
+      },
+      getCSS: (url, id) => {
+        if (cssCache.has(url)) {
+          return cssCache.get(url)
+        }
+
+        const promise = new Promise((resolve, reject) => {
+          const link = document.createElement('link')
+
+          link.rel = 'stylesheet'
+          link.href = url
+
+          if (id) {
+            link.id = id
+          }
+
+          link.onload = resolve
+          link.onerror = reject
+
+          document.head.appendChild(link)
+        })
+
+        cssCache.set(url, promise)
+
+        return promise
+      },
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+      const activateDarkMode = () => {
+        document.documentElement.dataset.theme = 'dark'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#3D332C')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.dataset.theme = 'light'
+        if (metaThemeColor !== null) {
+          metaThemeColor.setAttribute('content', '#F7F1E8')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Failed',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LLM、Agent与Harness',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><style>#site-info { display: none !important; }</style><link rel="stylesheet" href="/css/custom.css?v=16"><meta name="generator" content="Hexo 8.1.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><a class="avatar-link" href="/about/" aria-label="About me"><img src="/img/Hello.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></a></div><div class="site-data text-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">OLcan</span></a><span class="nav-dropdown-wrap"><button id="nav-dropdown-btn" type="button" aria-label="Menu" aria-expanded="false"><span class="chestnut-icon">🌰</span></button><div class="nav-dropdown"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> About</span></a></div></div></div></span><script>(function () {
+  var btn = document.getElementById('nav-dropdown-btn')
+  var menu = document.querySelector('.nav-dropdown')
+  if (!btn || !menu) return
+  function setOpen (open) {
+    menu.classList.toggle('show', open)
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false')
+  }
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation()
+    setOpen(!menu.classList.contains('show'))
+  })
+  document.addEventListener('click', function (e) {
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      setOpen(false)
+    }
+  })
+})()</script></span><div id="menus"><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout hide-aside" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">LLM、Agent与Harness</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><time datetime="2026-08-07T01:20:00.000Z" title="2026-08-07 09:20:00">2026-08-07</time></span><span class="post-meta-tags"><span class="post-meta-separator">|</span><i class="fas fa-tag fa-fw post-meta-icon"></i><a class="post-meta-tags" href="/tags/AI/">AI</a></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86%E7%AC%94%E8%AE%B0/">知识笔记</a></span></div><div class="meta-secondline"></div></div></div><article class="container post-content" id="article-container"><h2 id="内容总结"><a href="#内容总结" class="headerlink" title="内容总结"></a>内容总结</h2><p>本文用三个比喻讲清 AI 开发中的核心概念：</p>
+<ul>
+<li><strong>LLM 是大脑</strong>：提供理解与推理能力；</li>
+<li><strong>Agent 是四肢</strong>：在 LLM 基础上自主规划、调用工具、执行复杂任务；</li>
+<li><strong>Harness 是外套</strong>：约束 Agent 的能力边界，负责工具管理、进度控制和上下文管理。</li>
+</ul>
+<p>一句话概括：<strong>LLM 决定智商，Agent 决定行动力，Harness 决定安全与可控</strong>。</p>
+<hr>
+<p><strong>由外而内：</strong><br>Harness→Agent→LLM<br>「Harness释义：”马具、套具”」</p>
+<h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><p><strong>THE BRAIN…</strong></p>
+<h2 id="Agent"><a href="#Agent" class="headerlink" title="Agent"></a>Agent</h2><p><strong>THE BODY…</strong><br>现在流行着很多的Agent，比如：Codex、Claude Code、Hermes、Pi…</p>
+<blockquote>
+<p>LLM就是大脑，而Agent就是给这个大脑配上了四肢</p>
+</blockquote>
+<p>这样AI可以<strong>更智能</strong>的干活「能够理解目标、自主规划、<strong>调用工具</strong>并执行复杂的任务」</p>
+<p>在Agent出现之前，中间的过程都要<strong>人力付出</strong></p>
+<blockquote>
+<p>想法→实践→碰壁→AI→尝试→通过→碰壁→AI→……→实现</p>
+</blockquote>
+<p>在Agent出现之后，人力付出大大减少，效率提高</p>
+<blockquote>
+<p>想法→Agent→实现</p>
+</blockquote>
+<p><strong>当前阶段的定位</strong>：现阶段 Agent 多数采用 <strong>Human-in-the-Loop（人机协同）</strong> 模式——由 Agent 完成 80% 的繁琐执行与探索，在关键决策、高风险操作（如付费、删库、发邮件）时提示人类确认，平衡效率与安全性。</p>
+<h3 id="支撑-Agent-运作的关键能力"><a href="#支撑-Agent-运作的关键能力" class="headerlink" title="支撑 Agent 运作的关键能力"></a>支撑 Agent 运作的关键能力</h3><table>
+<thead>
+<tr>
+<th><strong>能力维度</strong></th>
+<th><strong>作用描述</strong></th>
+<th><strong>代表技术 &#x2F; 机制</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Plan</strong></td>
+<td>将复杂大目标拆解为小步骤，并在遇到挫折时调整策略。</td>
+<td>Chain-of-Thought (CoT)、ReAct 框架、树状搜索（MCTS）</td>
+</tr>
+<tr>
+<td><strong>Tool</strong></td>
+<td>突破模型静态知识库限制，获取实时数据与物理执行力。</td>
+<td>Function Calling、代码解释器、Web Search、API 连接器</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>记住当前交互进度（短期）及历史偏好&#x2F;业务规则（长期）。</td>
+<td>向量数据库（RAG）、Context Window、Episodic Memory</td>
+</tr>
+</tbody></table>
+<h3 id="Agent种类："><a href="#Agent种类：" class="headerlink" title="Agent种类："></a>Agent种类：</h3><p>Coding Agent、Research Agent、Personal Assistant Agent、Automation Agent</p>
+<h2 id="Harness"><a href="#Harness" class="headerlink" title="Harness"></a>Harness</h2><p><strong>THE CLOTH…</strong><br><img src="/img/posts/llm-agent-harness-1.png" alt="Harness 示意图"></p>
+<h3 id="工具管理"><a href="#工具管理" class="headerlink" title="工具管理"></a>工具管理</h3><p>Harness决定Agent能做什么</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">✅ 读取文件</span><br><span class="line">✅ 修改代码</span><br><span class="line">✅ 执行Shell</span><br><span class="line">✅ 搜索网页</span><br><span class="line">✅ 调用API</span><br><span class="line">❌ 删除整个磁盘</span><br><span class="line">❌ 查看密码</span><br></pre></td></tr></table></figure>
+
+<h3 id="进度管理"><a href="#进度管理" class="headerlink" title="进度管理"></a>进度管理</h3><p>Harness负责控制循环<br>开始→目标→<strong>思考→调用工具→观察结果</strong>→继续思考→… →实现→结束</p>
+<h3 id="上下文管理"><a href="#上下文管理" class="headerlink" title="上下文管理"></a>上下文管理</h3><p>Harness 会管理：</p>
+<ul>
+<li>历史消息</li>
+<li>文件内容</li>
+<li>项目状态</li>
+<li>长期记忆</li>
+</ul>
+<p>当 Agent 能做复杂任务时，需要一个 Harness 来保证：</p>
+<ul>
+<li><strong>不乱改</strong></li>
+<li><strong>可恢复</strong></li>
+<li><strong>可观察</strong></li>
+<li><strong>可控制</strong><br><img src="/img/posts/llm-agent-harness-2.png" alt="Harness 架构示意图"></li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI/">AI</a></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/08/06/%E5%AE%BD%E5%B8%A6%E3%80%81%E5%B8%A6%E5%AE%BD%E3%80%81%E6%B5%81%E9%87%8F%E3%80%81%E7%BD%91%E9%80%9F%EF%BC%9B%E5%86%85%E7%BD%91%E3%80%81%E5%A4%96%E7%BD%91%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/" title="宽带、带宽、流量、网速；内网、外网之间的区别与联系"><div class="info text-right"><div class="info-1"><div class="info-item-1">Next</div><div class="info-item-2">宽带、带宽、流量、网速；内网、外网之间的区别与联系</div></div></div></a></nav></div></main><footer id="footer"><div class="footer-other"><div class="footer-social" aria-label="Social links"><a class="footer-social-link" href="https://x.com/OLcan1x" target="_blank" rel="noopener noreferrer" title="X" aria-label="X"><i class="fab fa-x-twitter"></i></a><a class="footer-social-link" href="https://github.com/OLcan-Tsai" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a><span class="footer-author">@OLcan</span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Reading Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light and Dark Mode"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Settings"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back to Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.7.0"></script><script src="/js/main.js?v=5.7.0"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
