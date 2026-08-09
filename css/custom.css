@@ -202,6 +202,16 @@ html[data-theme='light'] #nav {
   border-radius: 8px;
 }
 
+/* Keep article tables horizontally scrollable on narrow screens without showing a scrollbar. */
+#article-container .table-wrap {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#article-container .table-wrap::-webkit-scrollbar {
+  display: none;
+}
+
 /* The same paper treatment is used when an individual page has no aside. */
 #content-inner.layout.hide-aside {
   max-width: 1500px;
